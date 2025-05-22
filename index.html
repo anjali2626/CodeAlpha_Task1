@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Image Gallery</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            background-color: #f5f5f5;
+        }
+
+        h1 {
+            margin-top: 30px;
+            margin-bottom: 30px;
+            font-size: 50px;
+            color: rgb(5, 5, 65);
+            font-weight: bold;
+        }
+
+        .tags {
+            margin-bottom: 20px;
+        }
+
+        .tags button {
+            margin: 5px;
+            padding: 10px 20px;
+            border: none;
+            background-color: #1e8bff;
+            color: white;
+            cursor: pointer;
+            border-radius: 10px;
+            font-size: 25px;
+            font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+        }
+
+        .tags button:hover {
+            background-color: #003165;
+        }
+
+        .gallery {
+            margin-top: 30px;
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+
+        .gallery img {
+            width: 400px;
+            height: 250px;
+            margin: 20px;
+            display: none;
+            border-radius: 10px;
+            cursor: pointer;
+            transition: transform 0.3s;
+        }
+
+        .gallery img:hover {
+            transform: scale(1.05);
+        }
+
+        .lightbox {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.8);
+            justify-content: center;
+            align-items: center;
+        }
+
+        .lightbox img {
+            max-width: 80%;
+            max-height: 80%;
+            border-radius: 10px;
+        }
+
+        .close {
+            position: absolute;
+            top: 20px;
+            right: 30px;
+            font-size: 40px;
+            color: white;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+    <h1>Image Gallery</h1>
+    <div class="tags">
+        <button onclick="filterImages('all')">All</button>
+        <button onclick="filterImages('animals')">Animals</button>
+        <button onclick="filterImages('city')">City Lights</button>
+        <button onclick="filterImages('animated')">Animated</button>
+        <button onclick="filterImages('land')">Land Scapes</button>
+    </div>
+
+    <div class="gallery">
+        <img src="image1.jpg" class="all animals" onclick="openLightbox(this)">
+        <img src="image27.jpg" class="all animated" onclick="openLightbox(this)">
+        <img src="image28.jpg" class="all land" onclick="openLightbox(this)">
+        <img src="image30.jpg" class="all land" onclick="openLightbox(this)">
+        <img src="image14.jpg" class="all city" onclick="openLightbox(this)">
+        <img src="image3.jpg" class="all animals" onclick="openLightbox(this)">
+        <img src="image29.jpg" class="all land" onclick="openLightbox(this)">
+        <img src="image12.jpg" class="all city" onclick="openLightbox(this)">
+        <img src="image26.jpg" class="all animated" onclick="openLightbox(this)">
+        <img src="image36.jpg" class="all land" onclick="openLightbox(this)">
+        <img src="image23.jpg" class="all animated" onclick="openLightbox(this)">
+        <img src="image4.jpg" class="all animals" onclick="openLightbox(this)">
+        <img src="image24.jpg" class="all animated" onclick="openLightbox(this)">
+        <img src="image17.jpg" class="all city" onclick="openLightbox(this)">
+        <img src="image32.jpeg" class="all land" onclick="openLightbox(this)">
+        <img src="image5.webp" class="all animals" onclick="openLightbox(this)">
+        <img src="image15.jpg" class="all city" onclick="openLightbox(this)">
+        <img src="image6.webp" class="all animals" onclick="openLightbox(this)">
+        <img src="image33.jpeg" class="all land" onclick="openLightbox(this)">
+        <img src="image7.jpg" class="all animals" onclick="openLightbox(this)">
+        <img src="image19.jpg" class="all animated" onclick="openLightbox(this)">
+        <img src="image20.webp" class="all animated" onclick="openLightbox(this)">
+        <img src="image8.jpg" class="all animals" onclick="openLightbox(this)">
+        <img src="image16.jpg" class="all city" onclick="openLightbox(this)">
+        <img src="image34.jpg" class="all land" onclick="openLightbox(this)">
+        <img src="image10.jpeg" class="all city" onclick="openLightbox(this)">
+        <img src="image2.jpg" class="all animals" onclick="openLightbox(this)">
+        <img src="image21.jpeg" class="all animated" onclick="openLightbox(this)">
+        <img src="image11.jpg" class="all city" onclick="openLightbox(this)">
+        <img src="image31.jpeg" class="all land" onclick="openLightbox(this)">
+        <img src="image22.jpg" class="all animated" onclick="openLightbox(this)">
+        <img src="image9.jpg" class="all animals" onclick="openLightbox(this)">
+        <img src="image18.jpg" class="all city" onclick="openLightbox(this)">
+        <img src="image35.jpeg" class="all land" onclick="openLightbox(this)">
+        <img src="image13.jpg" class="all city" onclick="openLightbox(this)">
+        <img src="image25.jpg" class="all animated" onclick="openLightbox(this)">    
+    </div>
+
+    <div id="lightbox" class="lightbox">
+        <span class="close" onclick="closeLightbox()">&times;</span>
+        <img id="lightbox-img" src="" alt="Expanded View">
+    </div>
+
+    <script>
+        function openLightbox(imgElement) {
+            const lightbox = document.getElementById('lightbox');
+            const lightboxImg = document.getElementById('lightbox-img');
+
+            lightboxImg.src = imgElement.src;
+            lightbox.style.display = "flex";
+        }
+
+        function closeLightbox() {
+            document.getElementById('lightbox').style.display = "none";
+        }
+    
+        function filterImages(tag) {
+            let images = document.querySelectorAll('.gallery img');
+            images.forEach(image => {
+                if (tag === 'all') {
+                    image.style.display = 'block';
+                } else {
+                    image.style.display = image.classList.contains(tag) ? 'block' : 'none';
+                }
+            });
+        }
+
+        // Show all images by default
+        filterImages('all');
+    </script>
+</body>
+</html>
